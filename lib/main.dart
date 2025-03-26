@@ -1,5 +1,7 @@
+import 'package:everyattire/bottom_nav.dart';
 import 'package:everyattire/constants/color_constants.dart';
 import 'package:everyattire/providers/auth_provider.dart';
+import 'package:everyattire/providers/cart_provider.dart';
 import 'package:everyattire/providers/products_provider.dart';
 import 'package:everyattire/screens/authentication_screen/login_screen.dart';
 import 'package:everyattire/screens/authentication_screen/register_screen.dart';
@@ -24,6 +26,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthenticationProvider()),
         ChangeNotifierProvider(create: (context) => ProductProvider()),
+        ChangeNotifierProvider(create: (context) => CartProvider()),  // Added CartProvider
+
 
       ],
       child: MaterialApp(
@@ -33,7 +37,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: scaffoldBGColor,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: Homepage(),
+        home: BottomNav(),
       ),
     );
   }
