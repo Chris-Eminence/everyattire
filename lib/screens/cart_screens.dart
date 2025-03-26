@@ -1,3 +1,4 @@
+import 'package:everyattire/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/cart_provider.dart';
@@ -34,13 +35,26 @@ class CartScreen extends StatelessWidget {
               },
             ),
           ),
-          Padding(
-            padding: EdgeInsets.all(16),
-            child: Text(
-              "Total: \$${cartProvider.totalPrice.toStringAsFixed(2)}",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
+          Column(
+            children: [
+              Text(
+                "Total: \$${cartProvider.totalPrice.toStringAsFixed(2)}",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              AppButton(
+                buttonText: "Checkout",
+                onPressed: () {
+                  SnackBar _ = SnackBar(
+                    content: Text("Checkout is not implemented yet"),
+                  );
+                },
+                width: 150,
+                buttonColor: Colors.green,
+                buttonTextColor: Colors.white,
+              )
+            ],
           ),
+
         ],
       ),
     );

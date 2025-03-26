@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: scaffoldBGColor,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: BottomNav(),
+        home: SplashScreen(),
       ),
     );
   }

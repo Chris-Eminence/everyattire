@@ -1,3 +1,4 @@
+import 'package:everyattire/bottom_nav.dart';
 import 'package:everyattire/providers/auth_provider.dart';
 import 'package:everyattire/screens/authentication_screen/login_screen.dart';
 import 'package:everyattire/widgets/app_button.dart';
@@ -158,7 +159,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         isLoading: authProvider.isLoading,
                         buttonTextColor: Colors.white,
                         onPressed: () async {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Homepage()));
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNav()));
                           // if (_formKey.currentState!.validate()) {
                           //   await  authProvider.registerUserProvider(
                           //     User(

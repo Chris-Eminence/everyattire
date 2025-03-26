@@ -8,6 +8,7 @@ class ProductProvider with ChangeNotifier {
   List<Product> _products = [];
   bool _isLoading = false;
   String _errorMessage = '';
+  Product? _selectedProduct;
 
   List<Product> get products => _products;
   bool get isLoading => _isLoading;

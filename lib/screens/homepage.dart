@@ -37,7 +37,7 @@ class _HomepageState extends State<Homepage> {
                           ),
                         ),
                         Text(
-                          'User Name',
+                          'John Doe',
                           style: GoogleFonts.poppins(
                             color: kBlackShade,
                             fontSize: 16,
@@ -46,7 +46,7 @@ class _HomepageState extends State<Homepage> {
                         ),
                       ],
                     ),
-                    CircleAvatar(child: SvgPicture.asset('assets/cart_icon.svg')),
+                    CircleAvatar(child: Icon(Icons.person)),
                   ],
                 ),
                 SizedBox(height: 24),
