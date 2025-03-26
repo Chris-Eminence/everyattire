@@ -1,3 +1,4 @@
+import 'package:everyattire/providers/favourite_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,8 @@ class ProductGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Provider.of<ProductProvider>(context, listen: false).fetchProducts(),
+      future:
+          Provider.of<ProductProvider>(context, listen: false).fetchProducts(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return GridView.count(
@@ -23,7 +25,7 @@ class ProductGrid extends StatelessWidget {
             mainAxisSpacing: 10,
             children: List.generate(
               6,
-                  (index) => _buildSkeletonItem(),
+              (index) => _buildSkeletonItem(),
             ), // Placeholder UI
           );
         }
@@ -38,9 +40,10 @@ class ProductGrid extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           crossAxisCount: 2,
           mainAxisSpacing: 70,
-          children: productProvider.products.map<Widget>((Product product) {
-            return _ProductItem(product: product);
-          }).toList(),
+          children:
+              productProvider.products.map<Widget>((Product product) {
+                return _ProductItem(product: product);
+              }).toList(),
         );
       },
     );
@@ -57,12 +60,22 @@ class ProductGrid extends StatelessWidget {
 
 class _ProductItem extends StatelessWidget {
   final Product product;
+
   _ProductItem({required this.product});
 
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
-    final ValueNotifier<bool> isInCart = ValueNotifier(cartProvider.isInCart(product.id!.toString()));
+    final favouriteProvider = Provider.of<FavouriteProvider>(
+      context,
+      listen: false,
+    );
+    final ValueNotifier<bool> isInCart = ValueNotifier(
+      cartProvider.isInCart(product.id!.toString()),
+    );
+    final ValueNotifier<bool> isInFavourite = ValueNotifier(
+      favouriteProvider.isInFavourite(product.id!.toString()),
+    );
 
     return Column(
       children: [
@@ -124,9 +137,27 @@ class _ProductItem extends StatelessWidget {
               Positioned(
                 right: 5,
                 top: 5,
-                child: CircleAvatar(
-                  backgroundColor: kWhiteShade3,
-                  child: SvgPicture.asset('assets/heart.svg'),
+                child: ValueListenableBuilder<bool>(
+                  valueListenable: isInFavourite,
+                  builder: (context, value, child) {
+                    return InkWell(
+                      onTap: () {
+                        if (value) {
+                          favouriteProvider.removeFromFavourite(product.id!.toString());
+                        } else {
+                          favouriteProvider.addToCart(product);
+                        }
+                        isInFavourite.value = !value;
+                      },
+
+                      child: InkWell(
+                        child: CircleAvatar(
+                          backgroundColor: value ? Colors.redAccent : kWhiteShade3,
+                          child: SvgPicture.asset('assets/heart.svg'),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],

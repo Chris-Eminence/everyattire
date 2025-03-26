@@ -1,5 +1,6 @@
 
 import 'package:everyattire/screens/cart_screens.dart';
+import 'package:everyattire/screens/favourites_screen.dart';
 import 'package:everyattire/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,7 +20,7 @@ class _BottomNavState extends State<BottomNav> {
   // List of widgets for each screen
   final List<Widget> _screens = [
     const Center(child: Homepage()),
-    const Center(child: Text("Favourites")),
+    Center(child: FavouriteScreen()),
     Center(child: CartScreen()),
 
   ];
@@ -44,7 +45,7 @@ class _BottomNavState extends State<BottomNav> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset("assets/favorites.svg"),
-            label: 'History',
+            label: 'Favourites',
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset("assets/cart_icon.svg"),
